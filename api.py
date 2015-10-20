@@ -6,8 +6,9 @@ from requests.auth import HTTPBasicAuth
 
 def send_confirmation():
   url = 'http://www.robofeedpet.com/api/v1/requests/confirmation'
+  headers = {'Authorization': 'Token token="EDlux0E1KtmRT6YDvQRTvQtt"'}
   payload = {'request': 'success'}
-  r = requests.put(url, json=payload)
+  r = requests.put(url, json=payload, headers=headers)
   return
 
 # r = requests.put('http://www.robofeedpet.com/run_pi', data = {"feed":"yes"})
@@ -21,7 +22,7 @@ print r
 
 if r["request"] == "feed":
   import servo1;
-  #send_confirmation();
+  send_confirmation();
 else:
   print "No food now"
 
