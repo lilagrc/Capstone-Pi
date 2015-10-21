@@ -1,6 +1,8 @@
 import requests
 import json
 
+from crontab import CronTab
+
 # from requests.auth import HTTPBasicAuth
 
 
@@ -20,12 +22,27 @@ r = requests.get(url, headers=headers)
 r = r.json()
 print r
 
+
 if r["feed_request"] == "feed" and r["schedule_request"] == None:
   import servo1;
   send_confirmation();
 elif r["schedule_request"] and r["feed_request"] == None:
- # Need to add logic to deal with times that are sent, which trigger scripts
- print "we're getting there"
+  time = r["schedule_request"]
+  time = int(time)
+  tab = CronTab(user=True)
+  cmd = 'sh /home/pi/schedule_launcher.sh'
+  cron_job = tab.new(cmd)
+  cron_job.minute.on(0)
+  cron_job.hour.on(time)
+
+  tab.write()
+elif r["schedule_request"] == "cancel":
+  tab = CronTab(user=True)
+  cmd = 'sh /home/pi/schedule_launcher.sh'
+
+  cron_job = tab.find_command(cmd)
+  tab.remove_all(cmd)
+  tab.write()
 else:
   print "No food now"
 
