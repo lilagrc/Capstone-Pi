@@ -3,20 +3,9 @@ import json
 
 from crontab import CronTab
 
-# from requests.auth import HTTPBasicAuth
-
-
-def send_confirmation():
-  url = 'http://www.robofeedpet.com/api/v1/requests/confirmation'
-  headers = {'Authorization': 'Token token="0ifRocz56aTevQbdBTbqjQtt"'}
-  payload = {'request': 'success'}
-  r = requests.put(url, json=payload, headers=headers)
-  return
-
 # r = requests.put('http://www.robofeedpet.com/run_pi', data = {"feed":"yes"})
 url = 'http://www.robofeedpet.com/api/v1/requests/new'
 headers = {'Authorization': 'Token token="0ifRocz56aTevQbdBTbqjQtt"'}
-
 r = requests.get(url, headers=headers)
 
 r = r.json()
@@ -26,7 +15,6 @@ if r["feed_request"] == None and r["schedule_request"] == None:
   print "do nothing"
 elif r["feed_request"] == "feed" and r["schedule_request"] == None:
   import servo1;
-  send_confirmation();
 elif r["schedule_request"] != "cancel" and r["feed_request"] == None:
   time = r["schedule_request"]
   time = int(time)
