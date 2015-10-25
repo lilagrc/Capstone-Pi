@@ -1,5 +1,15 @@
 import RPi.GPIO as GPIO
 import time
+import requests
+import json
+
+
+def send_confirmation():
+  url = 'http://www.robofeedpet.com/api/v1/requests/confirmation'
+  headers = {'Authorization': 'Token token="0ifRocz56aTevQbdBTbqjQtt"'}
+  payload = {'request': 'success'}
+  r = requests.put(url, json=payload, headers=headers)
+  return
 
 Servo1Pin=18
 
@@ -14,6 +24,8 @@ duty = float(400) / 10.0 + 2.5
 servo.ChangeDutyCycle(duty)
 time.sleep(.7)
 servo.stop()
+
+send_confirmation()
 
 
 # # This function turns the servo Clock Wise
