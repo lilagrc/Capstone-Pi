@@ -8,14 +8,14 @@ from crontab import CronTab
 
 def send_confirmation():
   url = 'http://www.robofeedpet.com/api/v1/requests/confirmation'
-  headers = {'Authorization': 'Token token="rl69KLMDARz3xBdQy3valQtt"'}
+  headers = {'Authorization': 'Token token="0ifRocz56aTevQbdBTbqjQtt"'}
   payload = {'request': 'success'}
   r = requests.put(url, json=payload, headers=headers)
   return
 
 # r = requests.put('http://www.robofeedpet.com/run_pi', data = {"feed":"yes"})
 url = 'http://www.robofeedpet.com/api/v1/requests/new'
-headers = {'Authorization': 'Token token="rl69KLMDARz3xBdQy3valQtt"'}
+headers = {'Authorization': 'Token token="0ifRocz56aTevQbdBTbqjQtt"'}
 
 r = requests.get(url, headers=headers)
 
@@ -45,14 +45,6 @@ elif r["schedule_request"] != "cancel" and r["feed_request"] == None:
     new_job.minute.on(0)
     new_job.hour.on(time)
     cron.write()
-
-
-  # go through and see if there is a match
-  #   job.minute.on(0)
-  #   job.hour.on(time)
-  #   cron.write()
-  #   print "Am I here?"
-
 elif r["schedule_request"] == "cancel":
   tab = CronTab(user='root')
   cmd = 'sh /home/pi/schedule_launcher.sh'
