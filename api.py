@@ -5,7 +5,7 @@ from crontab import CronTab
 
 # r = requests.put('http://www.robofeedpet.com/run_pi', data = {"feed":"yes"})
 url = 'http://www.robofeedpet.com/api/v1/requests/new'
-headers = {'Authorization': 'Token token="0ifRocz56aTevQbdBTbqjQtt"'}
+headers = {'Authorization': 'Token token="cprEhA7dnDaYfNltctmAtgtt"'}
 r = requests.get(url, headers=headers)
 
 r = r.json()

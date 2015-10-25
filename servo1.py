@@ -3,14 +3,6 @@ import time
 import requests
 import json
 
-
-def send_confirmation():
-  url = 'http://www.robofeedpet.com/api/v1/requests/confirmation'
-  headers = {'Authorization': 'Token token="0ifRocz56aTevQbdBTbqjQtt"'}
-  payload = {'request': 'success'}
-  r = requests.put(url, json=payload, headers=headers)
-  return
-
 Servo1Pin=18
 
 # Tell python what pin mode to use
@@ -25,7 +17,10 @@ servo.ChangeDutyCycle(duty)
 time.sleep(.7)
 servo.stop()
 
-send_confirmation()
+url = 'http://www.robofeedpet.com/api/v1/requests/confirmation'
+headers = {'Authorization': 'Token token="cprEhA7dnDaYfNltctmAtgtt"'}
+payload = {'request': 'success'}
+r = requests.put(url, json=payload, headers=headers)
 
 
 # # This function turns the servo Clock Wise
